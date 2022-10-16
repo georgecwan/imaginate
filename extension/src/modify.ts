@@ -50,7 +50,7 @@ clearElement.onclick = () => {
 let isDrawing;
 
 const getMousePos = (canvas: HTMLCanvasElement, evt: MouseEvent) => {
-  var rect = canvas.getBoundingClientRect();
+  const rect = canvas.getBoundingClientRect();
   return {
     x: evt.clientX - rect.left,
     y: evt.clientY - rect.top,
@@ -101,12 +101,22 @@ export const generateImage = async (body: Body) => {
   return res.json();
 };
 
+const strengthSlider = <HTMLInputElement>document.getElementById("promptStrength");
+strengthSlider.addEventListener("input", () => {
+  document.getElementById("strength").innerHTML = strengthSlider.value;
+})
+
 const submitButton = <HTMLButtonElement>document.getElementById("submit");
 submitButton.addEventListener("click", async () => {
+  document.getElementById("resultDiv").innerHTML = "";
+  const loadingWords = document.createElement("p");
+  loadingWords.innerHTML = "Generating image...";
+  document.getElementById("resultDiv").appendChild(loadingWords);
+
   const init_image = sourceImage.src;
   const mask = canvasElement.toDataURL("image/png");
   const prompt = (<HTMLInputElement>document.getElementById("prompt")).value;
-  const prompt_strength = 0.5;
+  const prompt_strength = parseInt((<HTMLInputElement>document.getElementById("promptStrength")).value)/100;
 
   const res = await generateImage({
     init_image,
@@ -115,6 +125,11 @@ submitButton.addEventListener("click", async () => {
     prompt_strength,
   });
   console.log(res);
+  document.getElementById("resultDiv").removeChild(loadingWords);
+  const imageURL = res.output[0];
+  const newImage = document.createElement("img");
+  newImage.src = imageURL;
+  document.getElementById("resultDiv").appendChild(newImage);
 });
 
 // Load the proper image from extension storage

@@ -25,6 +25,19 @@
             class="w-full rounded-md py-3 px-6 outline-none ring-neutral-50 transition-all placeholder:text-neutral-500"
               placeholder="New York City skyline at night, with the Empire State Building in the foreground"
             ></input>
+            <div class="flex items-center gap-2">
+            <p class="font-bold">Prompt Strength: </p>
+            <p class="text-gray-600">How much the prompt affects the result</p>
+            <span id="strength" class="font-medium">50</span>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              class="size"
+              id="promptStrength"
+            />
+            </div>
           </div>
 
           <!-- MASKING DIV -->
@@ -77,6 +90,8 @@
             Submit
           </button>
         </div>
+          <div id="resultDiv">
+          </div>
       </div>
     </main>
   </body>
