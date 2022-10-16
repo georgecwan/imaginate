@@ -24,6 +24,8 @@ def modify_image():
         init_image=body["init_image"],
         prompt_strength=body["prompt_strength"],
         mask=body["mask"] if "mask" in body else None,
+        width=body["width"],
+        height=body["height"],
     )
     return {"output": res}
 

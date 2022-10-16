@@ -1,3 +1,5 @@
+import { generateImage } from "./connection";
+
 const parentElement = <HTMLDivElement>document.getElementById("parent");
 const sourceImage = <HTMLImageElement>document.getElementById("sourceImage");
 const canvasElement = <HTMLCanvasElement>document.getElementById("canvas");
@@ -119,26 +121,6 @@ canvasElement.onmouseup = function () {
   context.closePath();
 };
 
-interface Body {
-  prompt: string;
-  prompt_strength: number;
-  init_image: string;
-  mask: string;
-}
-
-export const BACKEND_URL = "http://127.0.0.1:5000";
-
-export const generateImage = async (body: Body) => {
-  const res = await fetch(`${BACKEND_URL}/process`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
-  return res.json();
-};
-
 const strengthSlider = <HTMLInputElement>(
   document.getElementById("promptStrength")
 );
@@ -176,11 +158,50 @@ submitButton.addEventListener("click", async () => {
     "images/loadingPulse.gif";
   document.getElementById("resultDiv").style.display = "none";
 
+  // Keep image within 1024px width maintaining aspect ratio
+  function calculateAspectRatioFit(
+    srcWidth: number,
+    srcHeight: number,
+    maxWidth: number,
+    maxHeight: number
+  ) {
+    var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+
+    return { width: srcWidth * ratio, height: srcHeight * ratio };
+  }
+
+  const { width: w1, height: h1 } = calculateAspectRatioFit(
+    sourceImage.clientWidth,
+    sourceImage.clientHeight,
+    896,
+    768
+  );
+
+  const { width: w2, height: h2 } = calculateAspectRatioFit(
+    sourceImage.clientWidth,
+    sourceImage.clientHeight,
+    768,
+    896
+  );
+
+  let width = w1;
+  let height = h1;
+
+  if (w2 * h2 > w1 * h1) {
+    width = w2;
+    height = h2;
+  }
+
+  width = Math.floor(width / 128) * 128;
+  height = Math.floor(height / 128) * 128;
+
   const res = await generateImage({
     init_image,
     mask,
     prompt,
     prompt_strength,
+    width,
+    height,
   });
   console.log(res);
   const imageURL = res.output[0];
