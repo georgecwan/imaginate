@@ -5,9 +5,9 @@
   "author": "TEAM NAME",
   "manifest_version": 3,
   "permissions": [
+    "contextMenus",
     "storage",
-    "tabs",
-    "contextMenus"
+    "unlimitedStorage"
   ],
   "background": {
     "service_worker": "background.js"
