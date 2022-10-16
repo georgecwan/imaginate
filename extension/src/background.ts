@@ -8,6 +8,7 @@ function getUrl(info) {
         }
 
         chrome.storage.sync.set({urlList: storage.urlList || [info.srcUrl]});
+        console.log(popupOpen);
         if (popupOpen) {
             chrome.runtime.sendMessage({msg: "refresh"});
         }
@@ -21,14 +22,20 @@ chrome.runtime.onInstalled.addListener(() => {
         "contexts": ["image"],
     });
     chrome.contextMenus.onClicked.addListener(getUrl);
+});
 
-    chrome.runtime.onMessage.addListener(
+ chrome.runtime.onMessage.addListener(
     function(request) {
         if (request.msg === "loaded") {
             popupOpen = true;
         }
-        else if (request.msg === "closed") {
-            popupOpen = false;
-        }
-    });
+    }
+ );
+
+chrome.runtime.onConnect.addListener(function(port) {
+    if (port.name === "popup") {
+        port.onDisconnect.addListener(function() {
+           popupOpen = false;
+        });
+    }
 });

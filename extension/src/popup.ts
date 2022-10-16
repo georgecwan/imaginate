@@ -1,8 +1,5 @@
 chrome.storage.sync.get(['urlList'], function(result) {
     const { urlList } = result;
-    const temp = document.createElement('img');
-    temp.src = "https://www.w3schools.com/images/lamp.jpg";
-    document.getElementById('imageList').appendChild(temp);
     console.log(urlList);
     if (urlList !== undefined) {
         for (let i = 0; i < urlList.length; i++) {
@@ -24,11 +21,12 @@ chrome.runtime.onMessage.addListener(
 
 document.addEventListener('DOMContentLoaded', function() {
     chrome.runtime.sendMessage({ msg: "loaded" });
+    chrome.runtime.connect({ name: "popup" });
 
     const clearButton = document.getElementById('clearImages');
 
     clearButton.addEventListener('click', function() {
-        chrome.storage.sync.set({urlList: []});
+        chrome.storage.sync.set({ urlList: [] });
         window.location.reload();
     });
 });
