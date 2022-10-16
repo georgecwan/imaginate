@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 
 @tailwind base;
 @tailwind components;
@@ -22,26 +24,4 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-.imageWrap {
-  position: relative;
-}
-
-.delete {
-  cursor: pointer;
-  font-size: 18px;
-  color: aquamarine;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.modify {
-  cursor: pointer;
-  font-size: 18px;
-  color: aquamarine;
-  position: absolute;
-  bottom: 0;
-  right: 0;
 }

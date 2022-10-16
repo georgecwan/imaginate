@@ -8,17 +8,17 @@ chrome.storage.local.get(['urlList'], function(result) {
         noImages.style.display = "none";
         urlList.forEach((url, i) => {
             const container = document.createElement("div");
-            container.className = "imageWrap";
+            container.className = "relative";
             const img = document.createElement('img');
             img.src = url;
-            if (img.width / img.height > 1.3) {
-                img.style.gridColumn = "span 2 / span 2";
-                console.log("WIDE IMAGE");
-            }
-            const del = document.createElement('span');
+            img.addEventListener('load', () => {
+                if (img.width / img.height > 1.3) {
+                    container.classList.add("col-span-2");
+                }
+            })
+            const del = document.createElement('i');
             del.id = `del${i}`;
-            del.className = "delete";
-            del.innerText = "X";
+            del.className = "bi-icons bi-x text-lg cursor-pointer absolute top-1 right-1 text-white";
             del.addEventListener("click", () => {
                 const index = parseInt(del.id.slice(3));
                 chrome.storage.local.get(['urlList'], function(result) {
@@ -28,10 +28,9 @@ chrome.storage.local.get(['urlList'], function(result) {
                     location.reload();
                 });
             });
-            const modify = document.createElement('span');
+            const modify = document.createElement('i');
             modify.id = `mod${i}`;
-            modify.className = "modify";
-            modify.innerText = "M";
+            modify.className = "bi-icons bi-pencil-square text-lg cursor-pointer absolute bottom-1 right-1 text-white";
             modify.addEventListener("click", () => {
                 const index = parseInt(modify.id.slice(3));
                 chrome.storage.local.get(['urlList'], function(result) {

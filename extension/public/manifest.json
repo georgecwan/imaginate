@@ -1,6 +1,6 @@
 {
-  "short_name": "ARTISAN",
-  "name": "Artisan - A Cool Extension",
+  "short_name": "Imaginate",
+  "name": "Imaginate - Create and Inspire",
   "version": "1.0",
   "author": "GJHF",
   "manifest_version": 3,
@@ -21,7 +21,7 @@
       "128": "/images/download.png"
     }
   },
-  "description": "Makes very cool images!",
+  "description": "Create and reshape beautiful images at the speed of thought.",
   "icons": {
     "16": "/images/download.png",
     "32": "/images/download.png",

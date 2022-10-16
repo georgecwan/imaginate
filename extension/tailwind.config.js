@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-      "./src/*.{html, ts}",
-      "./public/*.{html, ts}",
+      "./src/*.ts",
+      "./public/*.{html, ts, js}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        'logo': ['"Pacifico"', 'cursive'],
+        'logo': ['"Cardo"', 'cursive'],
       }
     },
   },
