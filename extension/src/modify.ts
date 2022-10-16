@@ -80,11 +80,20 @@ function drawOnImage(image = null) {
     context.moveTo(e.clientX, e.clientY);
   };
 
+  function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top,
+    };
+  }
+
   canvasElement.onmousemove = (e) => {
-    console.log("onmousemove");
+    const { x, y } = getMousePos(canvasElement, e);
+    console.log(x, y);
 
     if (isDrawing) {
-      context.lineTo(e.clientX, e.clientY);
+      context.lineTo(x, y);
       context.stroke();
     }
   };

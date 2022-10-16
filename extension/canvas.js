@@ -84,6 +84,7 @@ function drawOnImage(image = null) {
   };
 
   canvasElement.onmousemove = (e) => {
+    console.log(e.clientX, e.clientY);
     if (isDrawing) {
       context.lineTo(e.clientX, e.clientY);
       context.stroke();
