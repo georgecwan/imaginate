@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="output.css" rel="stylesheet" />
-    <script defer type="module" src="js/modify.js"></script>
+    <link href="../dist/output.css" rel="stylesheet" />
+    <script defer type="module" src="../dist/js/modify.js"></script>
   </head>
   <body>
     <main>
@@ -13,7 +13,6 @@
           Image Editor
         </h1>
         <div class="flex items-center flex-col gap-8">
-          <h2 class="text-xl font-bold -mb-5">Input</h2>
 
           <!-- PROMPT DIV -->
           <div
@@ -21,10 +20,11 @@
           >
             <p class="font-bold">Prompt</p>
             <p class="text-gray-600">The prompt to modify the image</p>
-            <textarea
-              class="text-gray-600 border rounded-xl p-3"
+            <input
+            id="prompt"
+            class="w-full rounded-md py-3 px-6 outline-none ring-neutral-50 transition-all placeholder:text-neutral-500"
               placeholder="New York City skyline at night, with the Empire State Building in the foreground"
-            ></textarea>
+            ></input>
           </div>
 
           <!-- MASKING DIV -->
@@ -39,7 +39,7 @@
               class="invisible fixed"
               src="https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=800"
             />
-            <div id="parent" class="bg-red-500">
+            <div id="parent" className="h-96">
               <div
                 id="canvasContainer"
                 class="bg-cover bg-center"
@@ -47,27 +47,35 @@
                   background-image: url('https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=800');
                 "
               >
-                <canvas id="canvas" style="border: 1px solid red"></canvas>
+                <canvas id="canvas"></canvas>
               </div>
             </div>
-            <div style="margin-top: 5px">
-              <span>Size: </span>
-              <input
-                type="range"
-                min="1"
-                max="50"
-                value="25"
-                class="size"
-                id="sizeRange"
-              />
-            </div>
-            <div style="margin-top: 5px">
-              <button id="clear">Clear</button>
-            </div>
-            <div style="margin-top: 5px">
-              <button id="export">Export</button>
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-2">
+                <span class="font-medium">Brush Size: </span>
+                <input
+                  type="range"
+                  min="1"
+                  max="150"
+                  value="25"
+                  class="size"
+                  id="sizeRange"
+                />
+              </div>
+              <div style="margin-top: 5px">
+                <button id="clear" class="py-2 px-5 bg-red-500 shadow-md shadow-red-500/50 text-white rounded-lg font-medium text-sm">Clear</button>
+              </div>
+              <div style="margin-top: 5px">
+                <button id="export"  class="py-2 px-5 bg-green-500 shadow-md shadow-green-500/50 text-white rounded-lg font-medium text-sm">Export mask</button>
+              </div>
             </div>
           </div>
+          <button
+            id="submit"
+            class="py-2 px-5 bg-blue-500 shadow-lg shadow-blue-500/50 text-white rounded-lg font-medium text-lg"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </main>

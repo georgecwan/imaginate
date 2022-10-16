@@ -17,12 +17,19 @@ def hello_world():  # put application's code here
 def modify_image():
     body = request.json
     res = model.predict(
+        num_outputs=1,
         prompt=body["prompt"],
         init_image=body["init_image"],
         prompt_strength=body["prompt_strength"],
-        mask=body["mask"]
+        mask=body["mask"],
     )
     return {"output": res}
+
+
+@app.after_request
+def after_request(response):
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 if __name__ == "__main__":

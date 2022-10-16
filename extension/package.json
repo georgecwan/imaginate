@@ -15,5 +15,8 @@
   "scripts": {
     "build": "tailwindcss -i ./input.css -o ./dist/output.css --minify && webpack --config ./webpack.config.js ",
     "watch": "concurrently \"tailwindcss -i ./input.css -o ./dist/output.css --watch\" \"tsc -w\""
+  },
+  "dependencies": {
+    "axios": "^1.1.3"
   }
 }

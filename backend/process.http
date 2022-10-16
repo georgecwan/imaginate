@@ -3,7 +3,6 @@ POST http://127.0.0.1:5000/process
 Content-Type: application/json
 
 {
-  "num_outputs": 1,
   "prompt": "Tropical orange sunset on a beach. Sandy beach with palm trees, and waves in the ocean",
   "prompt_strength": 0.5,
   "init_image": "https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=800",
