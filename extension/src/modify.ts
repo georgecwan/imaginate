@@ -1,5 +1,3 @@
-import set = chrome.cookies.set;
-
 const parentElement = <HTMLDivElement>document.getElementById("parent");
 const sourceImage = <HTMLImageElement>document.getElementById("sourceImage");
 const canvasElement = <HTMLCanvasElement>document.getElementById("canvas");
@@ -46,11 +44,8 @@ function setTransparentToWhite() {
   const {data} = img;
   const {length} = data;
   for (let i = 0; i < length; i += 4) {
-    const r = data[i];
-    const g = data[i + 1];
-    const b = data[i + 2];
     const a = data[i + 3];
-    if (r === 0 && g === 0 && b === 0 && a === 0) {
+    if (a === 0) {
       // set to white
       data[i] = 255;
       data[i + 1] = 255;
@@ -188,4 +183,4 @@ chrome.storage.local.get(['urlList'], ({urlList}) => {
     sourceImage.src = urlList[parseInt(index)];
     canvasContainer.style.backgroundImage = `url(${urlList[parseInt(index)]})`;
   }
-})
+});
