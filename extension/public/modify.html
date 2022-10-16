@@ -36,7 +36,8 @@
         </label>
         <div class="flex items-center gap-2">
           <p class="font-bold">Model Strength: </p>
-          <p class="text-gray-600">How much the original image will be changed. 100 means the entire image will be redrawn.</p>
+          <p class="text-gray-600">How much the original image will be changed. 100 means the entire image will be
+            redrawn.</p>
           <span id="strength" class="font-medium">50</span>
           <input
             type="range"
@@ -60,15 +61,12 @@
         <img
           id="sourceImage"
           class="invisible fixed"
-          src="https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=800"
+          src=""
         />
         <div id="parent" className="h-96">
           <div
             id="canvasContainer"
             class="bg-cover bg-center"
-            style="
-                  background-image: url('https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=800');
-                "
           >
             <canvas id="canvas"></canvas>
           </div>
