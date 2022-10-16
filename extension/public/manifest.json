@@ -9,24 +9,27 @@
     "storage",
     "unlimitedStorage"
   ],
+  "host_permissions": [
+    "http://127.0.0.1:5000/*"
+  ],
   "background": {
     "service_worker": "js/background.js"
   },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "/images/download.png",
-      "32": "/images/download.png",
-      "48": "/images/download.png",
-      "128": "/images/download.png"
+      "16": "/images/imaginate.png",
+      "32": "/images/imaginate.png",
+      "48": "/images/imaginate.png",
+      "128": "/images/imaginate.png"
     }
   },
   "description": "Create and reshape beautiful images at the speed of thought.",
   "icons": {
-    "16": "/images/download.png",
-    "32": "/images/download.png",
-    "48": "/images/download.png",
-    "128": "/images/download.png"
+    "16": "/images/imaginate.png",
+    "32": "/images/imaginate.png",
+    "48": "/images/imaginate.png",
+    "128": "/images/imaginate.png"
   },
   "options_page": "modify.html",
   "options_ui": {
