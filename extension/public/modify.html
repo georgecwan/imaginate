@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../dist/output.css" rel="stylesheet">
+  <script defer type=module src="../dist/js/modify.js"></script>
 </head>
 <body>
 <main>
@@ -31,13 +32,19 @@
           Mark areas on the image to be changed
         </p>
         <!-- Use a div with a background image to display the image. The canvas is in the div -->
-        <div
+        <img
           id="sourceImage"
-          class="bg-cover bg-center aspect-[2726/2047]"
+          class="invisible fixed"
+          src="https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?cs=srgb&dl=pexels-fabian-wiktor-994605.jpg&fm=jpg"
+        />
+        <div
+          id="canvasContainer"
+          class="bg-cover bg-center"
           style="background-image: url('https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?cs=srgb&dl=pexels-fabian-wiktor-994605.jpg&fm=jpg');"
         >
           <canvas id="canvas"></canvas>
         </div>
+
 
       </div>
     </div>
