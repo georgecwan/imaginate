@@ -62,13 +62,6 @@ function drawOnImage(image = null) {
     context.clearRect(0, 0, canvasElement.width, canvasElement.height);
   };
 
-  const saveElement = document.getElementById("save");
-  saveElement.onclick = () => {
-    const image = canvasElement.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    console.log(image);
-  };
-
-
   let isDrawing;
 
   canvasElement.onmousedown = (e) => {
@@ -94,3 +87,8 @@ function drawOnImage(image = null) {
   };
 }
 
+const exportMask = () => {
+  const canvas = document.getElementById("canvas");
+  const img = canvas.toDataURL("image/png");
+  console.log(img);
+};
