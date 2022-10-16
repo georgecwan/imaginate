@@ -93,6 +93,9 @@ export const BACKEND_URL = "http://127.0.0.1:5000";
 export const generateImage = async (body: Body) => {
   const res = await fetch(`${BACKEND_URL}/process`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(body),
   });
   return res.json();
@@ -113,3 +116,12 @@ submitButton.addEventListener("click", async () => {
   });
   console.log(res);
 });
+
+// Load the proper image from extension storage
+chrome.storage.local.get(['urlList'], ({urlList}) => {
+  const index = (new URL(window.location.href)).searchParams.get('index');
+  if (index) {
+    sourceImage.src = urlList[parseInt(index)];
+    canvasContainer.style.backgroundImage = `url(${urlList[parseInt(index)]})`;
+  }
+})

@@ -1,5 +1,6 @@
 from flask import Flask, request
 from dotenv import load_dotenv
+from flask_cors import cross_origin
 import replicate
 
 load_dotenv()
@@ -14,6 +15,7 @@ def hello_world():  # put application's code here
 
 
 @app.route("/process", methods=["POST"])
+@cross_origin()
 def modify_image():
     body = request.json
     res = model.predict(
@@ -26,11 +28,12 @@ def modify_image():
     return {"output": res}
 
 
-@app.after_request
-def after_request(response):
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    return response
+# @app.after_request
+# def after_request(response):
+#     response.headers.set("Access-Control-Allow-Origin", "*")
+#     response.headers.set("Access-Control-Allow-Headers", "content-type")
+#     return response
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
