@@ -7,13 +7,30 @@ chrome.storage.local.get(['urlList'], function(result) {
         imageList.style.display = "grid";
         noImages.style.display = "none";
         urlList.forEach((url, i) => {
+            const container = document.createElement("div");
+            container.className = "imageWrap";
             const img = document.createElement('img');
             img.src = url;
             if (img.width / img.height > 1.3) {
                 img.style.gridColumn = "span 2 / span 2";
                 console.log("WIDE IMAGE");
             }
-            imageList.appendChild(img);
+            const del = document.createElement('span');
+            del.id = `del${i}`;
+            del.className = "delete";
+            del.innerText = "X";
+            del.addEventListener("click", () => {
+                const index = parseInt(del.id.slice(3));
+                chrome.storage.local.get(['urlList'], function(result) {
+                    const { urlList } = result;
+                    urlList.splice(index, 1);
+                    chrome.storage.local.set({urlList: urlList});
+                    location.reload();
+                });
+            });
+            container.appendChild(img)
+            container.appendChild(del);
+            imageList.appendChild(container);
             console.log(url);
         })
     } else {
@@ -26,7 +43,7 @@ chrome.storage.local.get(['urlList'], function(result) {
 chrome.runtime.onMessage.addListener(
     function(request) {
         if (request.msg === "refresh") {
-            window.location.reload();
+            location.reload();
         }
     }
 );
@@ -36,13 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.runtime.connect({ name: "popup" });
 
     const clearButton = document.getElementById('clearImages');
-
     clearButton.addEventListener('click', function() {
         chrome.storage.local.set({ urlList: [] });
-        window.location.reload();
+        location.reload();
     });
-});
-
-document.addEventListener('pageHide', function() {
-    chrome.runtime.sendMessage({ msg: "closed" });
 });

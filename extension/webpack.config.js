@@ -4,10 +4,11 @@ module.exports = {
    mode: "production",
    entry: {
       background: path.resolve(__dirname, "src", "background.ts"),
+      modify: path.resolve(__dirname, "src", "modify.ts"),
       popup: path.resolve(__dirname, "src", "popup.ts")
    },
    output: {
-      path: path.join(__dirname, "./dist"),
+      path: path.join(__dirname, "./dist/js"),
       filename: "[name].js",
    },
    resolve: {
@@ -24,7 +25,7 @@ module.exports = {
    },
    plugins: [
       new CopyPlugin({
-         patterns: [{from: "public"}]
+         patterns: [{from: "public", to: "../"}]
       }),
    ],
 };

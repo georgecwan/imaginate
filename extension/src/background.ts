@@ -8,7 +8,6 @@ function getUrl(info) {
         }
 
         chrome.storage.local.set({urlList: storage.urlList || [info.srcUrl]});
-        console.log(popupOpen);
         if (popupOpen) {
             chrome.runtime.sendMessage({msg: "refresh"});
         }

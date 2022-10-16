@@ -20,8 +20,7 @@ def modify_image():
         prompt=body["prompt"],
         init_image=body["init_image"],
         prompt_strength=body["prompt_strength"],
-        mask=body["mask"],
-        num_outputs=body["num_outputs"],
+        mask=body["mask"]
     )
     return {"output": res}
 

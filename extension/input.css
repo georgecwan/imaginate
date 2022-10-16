@@ -23,3 +23,15 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.delete {
+  cursor: pointer;
+  font-size: 18px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.imageWrap {
+  position: relative;
+}

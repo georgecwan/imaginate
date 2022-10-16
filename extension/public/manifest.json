@@ -1,8 +1,8 @@
 {
-  "short_name": "TBD",
-  "name": "TBD",
+  "short_name": "ARTISAN",
+  "name": "Artisan - A Cool Extension",
   "version": "1.0",
-  "author": "TEAM NAME",
+  "author": "GJHF",
   "manifest_version": 3,
   "permissions": [
     "contextMenus",
@@ -10,7 +10,7 @@
     "unlimitedStorage"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "js/background.js"
   },
   "action": {
     "default_popup": "popup.html",
@@ -21,7 +21,7 @@
       "128": "/images/download.png"
     }
   },
-  "description": "TODO",
+  "description": "Makes very cool images!",
   "icons": {
     "16": "/images/download.png",
     "32": "/images/download.png",
