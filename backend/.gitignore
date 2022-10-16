@@ -1,6 +1,5 @@
 .env
 .idea/
-venv/
 .DS_Store
 
 *.pyc
