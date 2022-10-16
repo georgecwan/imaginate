@@ -1,5 +1,36 @@
 {
+  "short_name": "TBD",
+  "name": "TBD",
+  "version": "1.0",
+  "author": "TEAM NAME",
   "manifest_version": 3,
-  "name": "",
-  "version": "1.0"
+  "permissions": [
+    "storage",
+    "tabs",
+    "contextMenus"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "browser_action": {
+    "default_popup": "extension/popup.html",
+    "default_icon": {
+      "16": "/images/logo16.png",
+      "32": "/images/logo32.png",
+      "48": "/images/logo48.png",
+      "128": "/images/logo128.png"
+    }
+  },
+  "default_locale": "en",
+  "description": "TODO",
+  "icons": {
+    "16": "/images/logo16.png",
+    "32": "/images/logo32.png",
+    "48": "/images/logo48.png",
+    "128": "/images/logo128.png"
+  },
+  "options_page": "modify.html",
+  "options_ui": {
+    "page": "modify.html"
+  }
 }
