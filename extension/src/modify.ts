@@ -1,3 +1,4 @@
+const parentElement = <HTMLDivElement>document.getElementById("parent");
 const sourceImage = <HTMLImageElement>document.getElementById("sourceImage");
 const canvasElement = <HTMLCanvasElement>document.getElementById("canvas");
 const context = canvasElement.getContext("2d");
@@ -5,42 +6,24 @@ const canvasContainer = <HTMLDivElement>(
   document.getElementById("canvasContainer")
 );
 
-const computeDimensions = () => {
+const setDimensions = () => {
   const originalWidth = sourceImage.clientWidth;
   const originalHeight = sourceImage.clientHeight;
-
-  console.log("originalWidth", originalWidth);
-  console.log("originalHeight", originalHeight);
-
   const aspect = originalWidth / originalHeight;
 
-  // Make this image fit into a box that is 768px by 768px
-  const maxLength = 768;
+  const width = parentElement.clientWidth;
+  const height = width / aspect;
 
-  // If the image is wider than it is tall
-  if (aspect > 1) {
-    return {
-      width: maxLength,
-      height: maxLength / aspect,
-    };
-  } else {
-    // If the image is taller than it is wide
-    return {
-      width: maxLength * aspect,
-      height: maxLength,
-    };
-  }
+  canvasContainer.style.width = `${width}px`;
+  canvasContainer.style.height = `${height}px`;
+  canvasElement.width = width;
+  canvasElement.height = height;
 };
 
-const { height, width } = computeDimensions();
-
-canvasContainer.style.width = `${width}px`;
-canvasContainer.style.height = `${height}px`;
-
-canvasElement.width = width;
-canvasElement.height = height;
-
-// TODO: New one
+setDimensions();
+window.onresize = () => {
+  setDimensions();
+};
 
 const clearButton = <HTMLButtonElement>document.getElementById("clear");
 clearButton.onclick = () => {
