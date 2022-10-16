@@ -1,4 +1,8 @@
 import replicate
+from dotenv import load_dotenv
+
+load_dotenv()
+
 model = replicate.models.get("stability-ai/stable-diffusion")
 
 """
@@ -19,6 +23,12 @@ num_inference_steps: int
 guidance_scale: float
 """
 
-out = model.predict(
-    prompt="an astronaut riding a horse on mars",
-)
+
+# Tests
+if __name__ == "__main__":
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    out = model.predict(prompt="an astronaut riding a horse on mars")
+
+    print(out[0])
