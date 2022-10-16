@@ -24,14 +24,24 @@
   background: #555;
 }
 
+.imageWrap {
+  position: relative;
+}
+
 .delete {
   cursor: pointer;
   font-size: 18px;
+  color: aquamarine;
   position: absolute;
   top: 0;
   right: 0;
 }
 
-.imageWrap {
-  position: relative;
+.modify {
+  cursor: pointer;
+  font-size: 18px;
+  color: aquamarine;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

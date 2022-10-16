@@ -28,8 +28,19 @@ chrome.storage.local.get(['urlList'], function(result) {
                     location.reload();
                 });
             });
+            const modify = document.createElement('span');
+            modify.id = `mod${i}`;
+            modify.className = "modify";
+            modify.innerText = "M";
+            modify.addEventListener("click", () => {
+                const index = parseInt(modify.id.slice(3));
+                chrome.storage.local.get(['urlList'], function(result) {
+                    chrome.tabs.create( {'url': `/modify.html?index=${index}`} )
+                });
+            });
             container.appendChild(img)
             container.appendChild(del);
+            container.appendChild(modify);
             imageList.appendChild(container);
             console.log(url);
         })
