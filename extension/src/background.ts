@@ -1,7 +1,12 @@
+function getUrl(info, tab) {
+  return alert(info.pageUrl + info.frameUrl + info.srcUrl);
+}
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
-    "id": "sampleContextMenu",
-    "title": "Sample Context Menu",
-    "contexts": ["selection"],
+    "id": "addNewImage",
+    "title": "Add image to gallery",
+    "contexts": ["image"],
   });
+  chrome.contextMenus.onClicked.addListener(getUrl);
 });
