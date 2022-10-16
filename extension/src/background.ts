@@ -1,13 +1,13 @@
 let popupOpen: boolean = false;
 
 function getUrl(info) {
-    chrome.storage.sync.get(function(storage) {
+    chrome.storage.local.get(function(storage) {
         const urlList = storage.urlList;
         if (urlList !== undefined) {
             urlList.push(info.srcUrl);
         }
 
-        chrome.storage.sync.set({urlList: storage.urlList || [info.srcUrl]});
+        chrome.storage.local.set({urlList: storage.urlList || [info.srcUrl]});
         console.log(popupOpen);
         if (popupOpen) {
             chrome.runtime.sendMessage({msg: "refresh"});

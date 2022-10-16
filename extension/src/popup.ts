@@ -1,4 +1,4 @@
-chrome.storage.sync.get(['urlList'], function(result) {
+chrome.storage.local.get(['urlList'], function(result) {
     const { urlList } = result;
     console.log(urlList);
     if (urlList !== undefined) {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearButton = document.getElementById('clearImages');
 
     clearButton.addEventListener('click', function() {
-        chrome.storage.sync.set({ urlList: [] });
+        chrome.storage.local.set({ urlList: [] });
         window.location.reload();
     });
 });
