@@ -108,10 +108,8 @@ strengthSlider.addEventListener("input", () => {
 
 const submitButton = <HTMLButtonElement>document.getElementById("submit");
 submitButton.addEventListener("click", async () => {
-  document.getElementById("resultDiv").innerHTML = "";
-  const loadingWords = document.createElement("p");
-  loadingWords.innerHTML = "Generating image...";
-  document.getElementById("resultDiv").appendChild(loadingWords);
+  (<HTMLImageElement>document.getElementById("loadingImg")).src = "images/loadingPulse.gif";
+  document.getElementById("resultDiv").style.display = "none";
 
   const init_image = sourceImage.src;
   const mask = canvasElement.toDataURL("image/png");
@@ -125,11 +123,10 @@ submitButton.addEventListener("click", async () => {
     prompt_strength,
   });
   console.log(res);
-  document.getElementById("resultDiv").removeChild(loadingWords);
   const imageURL = res.output[0];
-  const newImage = document.createElement("img");
-  newImage.src = imageURL;
-  document.getElementById("resultDiv").appendChild(newImage);
+  (<HTMLImageElement>document.getElementById("loadingImg")).src = "";
+  document.getElementById("resultDiv").style.display = "block";
+  (<HTMLImageElement>document.getElementById("resultDiv").children[1]).src = imageURL;
 });
 
 // Load the proper image from extension storage
