@@ -5,7 +5,7 @@ function getUrl(info) {
             urlList.push(info.srcUrl);
         }
 
-        chrome.storage.sync.set({urlList: storage.urlList || []});
+        chrome.storage.sync.set({urlList: storage.urlList || [info.srcUrl]});
         console.log(urlList);
     });
 }
