@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/js",
+    "allowJs": true,
+    "target": "es5",
+    "module": "commonJS",
+    "moduleResolution": "node"
+  },
+  "include": ["./*.ts"]
+}
