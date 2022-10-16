@@ -1,26 +1,36 @@
-const sourceImage = document.getElementById("sourceImage");
-const canvas = <HTMLCanvasElement> document.getElementById("canvas");
-const canvasContainer = document.getElementById("canvasContainer");
+const sourceImage = <HTMLImageElement>document.getElementById("sourceImage");
+const canvas = <HTMLCanvasElement>document.getElementById("canvas");
+const canvasContainer = <HTMLDivElement>(
+  document.getElementById("canvasContainer")
+);
 
-function updateDimensions() {
-  const width = sourceImage.clientWidth;
-  const height = sourceImage.clientHeight;
-  console.log("width: " + width + " height: " + height);
+const computeDimensions = () => {
+  const originalWidth = sourceImage.naturalWidth;
+  const originalHeight = sourceImage.naturalHeight;
 
-  const aspect = width / height;
+  const aspect = originalWidth / originalHeight;
 
-  if (width > 1024) {
-    canvas.width = 1024;
-    canvas.height = 1024 / aspect;
+  // Make this image fit into a box that is 768px by 768px
+  const maxLength = 768;
+
+  // If the image is wider than it is tall
+  if (aspect > 1) {
+    return {
+      width: maxLength,
+      height: maxLength / aspect,
+    };
+  } else {
+    // If the image is taller than it is wide
+    return {
+      width: maxLength * aspect,
+      height: maxLength,
+    };
   }
-  if (height > 768) {
-    canvas.height = 768;
-    canvas.width = 768 * aspect;
-  }
-  canvasContainer.style.aspectRatio = aspect.toString();
+};
 
-  canvas.width = width;
-  canvas.height = height;
-}
-updateDimensions();
-sourceImage.addEventListener("resize", updateDimensions);
+const { height, width } = computeDimensions();
+
+canvasContainer.style.width = `${width}px`;
+canvasContainer.style.height = `${height}px`;
+canvas.style.width = `${width}px`;
+canvas.style.height = `${height}px`;
