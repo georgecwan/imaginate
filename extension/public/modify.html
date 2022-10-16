@@ -1,101 +1,117 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="output.css" rel="stylesheet" />
-    <script defer type="module" src="js/modify.js"></script>
-  </head>
-  <body>
-    <main>
-      <div class="px-12 py-8">
-        <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">
-          Image Editor
-        </h1>
-        <div class="flex items-center flex-col gap-8">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="output.css" rel="stylesheet"/>
+  <script defer type="module" src="js/modify.js"></script>
+</head>
+<body class="bg-[#FFFBF5]">
+<main>
+  <div class="px-12 py-8">
+    <h1 class="text-2xl font-bold text-center mb-5 font-logo text-[#DE3163]">
+      imaginate
+    </h1>
+    <h1 class="text-xl font-bold text-gray-800 text-center mb-5 font-logo">
+      Modify Image
+    </h1>
+    <div class="flex items-center flex-col gap-8">
 
-          <!-- PROMPT DIV -->
-          <div
-            class="flex flex-col justify-between bg-gray-100 border rounded-3xl p-6 container gap-1"
-          >
-            <p class="font-bold">Prompt</p>
-            <p class="text-gray-600">The prompt to modify the image</p>
-            <input
-            id="prompt"
-            class="w-full rounded-md py-3 px-6 outline-none ring-neutral-50 transition-all placeholder:text-neutral-500"
-              placeholder="New York City skyline at night, with the Empire State Building in the foreground"
-            ></input>
-            <div class="flex items-center gap-2">
-            <p class="font-bold">Prompt Strength: </p>
-            <p class="text-gray-600">How much the prompt affects the result</p>
-            <span id="strength" class="font-medium">50</span>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value="50"
-              class="size"
-              id="promptStrength"
-            />
-            </div>
-          </div>
+      <!-- PROMPT DIV -->
+      <div
+        class="flex flex-col justify-between bg-gray-100 border rounded-3xl p-6 container gap-1"
+      >
+        <p class="font-bold">Prompt</p>
+        <p class="text-gray-600">The prompt to modify the image</p>
+        <input
+          id="prompt"
+          class="w-full rounded-md py-3 px-6 outline-none ring-neutral-50 transition-all placeholder:text-neutral-500"
+          placeholder="New York City skyline at night, with the Empire State Building in the foreground"
+        >
+        <label
+          for="prompt"
+          id="prompt-label"
+          class="text-sm text-red-600"
+        >
+        </label>
+        <div class="flex items-center gap-2">
+          <p class="font-bold">Model Strength: </p>
+          <p class="text-gray-600">How much the original image will be changed. 100 means the entire image will be redrawn.</p>
+          <span id="strength" class="font-medium">50</span>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            class="size"
+            id="promptStrength"
+          />
+        </div>
+      </div>
 
-          <!-- MASKING DIV -->
+      <!-- MASKING DIV -->
+      <div
+        class="flex flex-col justify-between bg-gray-100 border rounded-3xl p-6 container gap-1"
+      >
+        <p class="font-bold">Mask (Optional)</p>
+        <p class="text-gray-600">Mark areas on the image to be changed. Best used with strength values between
+          60-80.</p>
+        <!-- Use a div with a background image to display the image. The canvas is in the div -->
+        <img
+          id="sourceImage"
+          class="invisible fixed"
+          src="https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=800"
+        />
+        <div id="parent" className="h-96">
           <div
-            class="flex flex-col justify-between bg-gray-100 border rounded-3xl p-6 container gap-1"
-          >
-            <p class="font-bold">Mask (Optional)</p>
-            <p class="text-gray-600">Mark areas on the image to be changed</p>
-            <!-- Use a div with a background image to display the image. The canvas is in the div -->
-            <img
-              id="sourceImage"
-              class="invisible fixed"
-              src="https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=800"
-            />
-            <div id="parent" className="h-96">
-              <div
-                id="canvasContainer"
-                class="bg-cover bg-center"
-                style="
+            id="canvasContainer"
+            class="bg-cover bg-center"
+            style="
                   background-image: url('https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=800');
                 "
-              >
-                <canvas id="canvas"></canvas>
-              </div>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="flex items-center gap-2">
-                <span class="font-medium">Brush Size: </span>
-                <input
-                  type="range"
-                  min="1"
-                  max="150"
-                  value="25"
-                  class="size"
-                  id="sizeRange"
-                />
-              </div>
-              <div style="margin-top: 5px">
-                <button id="clear" class="py-2 px-5 bg-red-500 shadow-md shadow-red-500/50 text-white rounded-lg font-medium text-sm">Clear</button>
-              </div>
-              <div style="margin-top: 5px">
-                <button id="export"  class="py-2 px-5 bg-green-500 shadow-md shadow-green-500/50 text-white rounded-lg font-medium text-sm">Export mask</button>
-              </div>
-            </div>
-          </div>
-          <button
-            id="submit"
-            class="py-2 px-5 bg-blue-500 shadow-lg shadow-blue-500/50 text-white rounded-lg font-medium text-lg"
           >
-            Submit
-          </button>
-          <img id="loadingImg" src="">
-          <div id="resultDiv" class="flex flex-col bg-gray-100 border rounded-3xl p-6 container gap-1 m-6 hidden">
-            <p class="font-bold">Generated Image</p>
-            <img class="w-full" src="">
+            <canvas id="canvas"></canvas>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <span class="font-medium">Brush Size: </span>
+            <input
+              type="range"
+              min="1"
+              max="150"
+              value="25"
+              class="size"
+              id="sizeRange"
+            />
+          </div>
+          <div style="margin-top: 5px">
+            <button id="clear"
+                    class="py-2 px-5 bg-red-500 shadow-md shadow-red-500/50 text-white rounded-lg font-medium text-sm">
+              Clear
+            </button>
+          </div>
+          <div style="margin-top: 5px">
+            <button id="export"
+                    class="py-2 px-5 bg-green-500 shadow-md shadow-green-500/50 text-white rounded-lg font-medium text-sm">
+              Export mask
+            </button>
           </div>
         </div>
       </div>
-    </main>
-  </body>
+      <button
+        id="submit"
+        class="py-2 px-5 bg-blue-500 shadow-lg shadow-blue-500/50 text-white rounded-lg font-medium text-lg"
+      >
+        Submit
+      </button>
+      <img id="loadingImg" src="">
+      <div id="resultDiv" class="flex flex-col bg-gray-100 border rounded-3xl p-6 container gap-1 m-6 hidden">
+        <p class="font-bold">Generated Image</p>
+        <img class="w-full" src="">
+      </div>
+    </div>
+  </div>
+</main>
+</body>
 </html>

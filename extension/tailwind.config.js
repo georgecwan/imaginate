@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'logo': ['"Cardo"', 'cursive'],
+        'sans': ['"Inter"', 'sans-serif'],
       }
     },
   },
