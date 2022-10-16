@@ -1,4 +1,4 @@
-chrome.storage.sync.get(['urlList'], function(result) {
+chrome.storage.local.get(['urlList'], function(result) {
     const { urlList } = result;
     console.log(urlList);
     const imageList = document.getElementById("imageList");
@@ -33,11 +33,12 @@ chrome.runtime.onMessage.addListener(
 
 document.addEventListener('DOMContentLoaded', function() {
     chrome.runtime.sendMessage({ msg: "loaded" });
+    chrome.runtime.connect({ name: "popup" });
 
     const clearButton = document.getElementById('clearImages');
 
     clearButton.addEventListener('click', function() {
-        chrome.storage.sync.set({urlList: []});
+        chrome.storage.local.set({ urlList: [] });
         window.location.reload();
     });
 });

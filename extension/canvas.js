@@ -55,7 +55,16 @@ function drawOnImage(image = null) {
 
   // if an image is present,
   // the image passed as a parameter is drawn in the canvas
-  // don't draw the image, keep the blank canvas
+  if (image) {
+    const imageWidth = image.width;
+    const imageHeight = image.height;
+
+    // rescaling the canvas element
+    canvasElement.width = imageWidth;
+    canvasElement.height = imageHeight;
+
+    context.drawImage(image, 0, 0, imageWidth, imageHeight);
+  }
 
   const clearElement = document.getElementById("clear");
   clearElement.onclick = () => {

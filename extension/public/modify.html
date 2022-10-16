@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="output.css" rel="stylesheet">
-  <script defer type=module src="/js/modify.js"></script>
-</head>
-<body>
-<main>
-  <div class="px-12 py-8">
-    <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">Image Editor</h1>
-    <div class="flex items-center flex-col gap-8">
-      <h2 class="text-xl font-bold -mb-5">Input</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/output.css" rel="stylesheet" />
+    <script defer type="module" src="../dist/js/modify.js"></script>
+  </head>
+  <body>
+    <main>
+      <div class="px-12 py-8">
+        <h1 class="text-2xl font-bold text-gray-800 text-center mb-5">
+          Image Editor
+        </h1>
+        <div class="flex items-center flex-col gap-8">
+          <h2 class="text-xl font-bold -mb-5">Input</h2>
 
-      <!-- PROMPT DIV -->
-      <div class="flex flex-col justify-between bg-gray-100 border rounded-3xl p-6 container gap-1">
-        <p class="font-bold">Prompt</p>
-        <p class="text-gray-600">
-          The prompt to modify the image
-        </p>
-        <textarea
-          class="text-gray-600 border rounded-xl p-3"
-          placeholder="New York City skyline at night, with the Empire State Building in the foreground"
-        ></textarea>
-      </div>
+          <!-- PROMPT DIV -->
+          <div
+            class="flex flex-col justify-between bg-gray-100 border rounded-3xl p-6 container gap-1"
+          >
+            <p class="font-bold">Prompt</p>
+            <p class="text-gray-600">The prompt to modify the image</p>
+            <textarea
+              class="text-gray-600 border rounded-xl p-3"
+              placeholder="New York City skyline at night, with the Empire State Building in the foreground"
+            ></textarea>
+          </div>
 
-      <!-- MASKING DIV -->
-      <div class="flex flex-col justify-between bg-gray-100 border rounded-3xl p-6 container gap-1">
-        <p class="font-bold">Mask (Optional)</p>
-        <p class="text-gray-600">
-          Mark areas on the image to be changed
-        </p>
-        <!-- Use a div with a background image to display the image. The canvas is in the div -->
-        <img
-          id="sourceImage"
-          class="invisible fixed"
-          src="https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?cs=srgb&dl=pexels-fabian-wiktor-994605.jpg&fm=jpg"
-        />
-        <div
-          id="canvasContainer"
-          class="bg-cover bg-center"
-          style="background-image: url('https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?cs=srgb&dl=pexels-fabian-wiktor-994605.jpg&fm=jpg');"
-        >
-          <canvas id="canvas"></canvas>
+          <!-- MASKING DIV -->
+          <div
+            class="flex flex-col justify-between bg-gray-100 border rounded-3xl p-6 container gap-1"
+          >
+            <p class="font-bold">Mask (Optional)</p>
+            <p class="text-gray-600">Mark areas on the image to be changed</p>
+            <!-- Use a div with a background image to display the image. The canvas is in the div -->
+            <img
+              id="sourceImage"
+              class="invisible fixed"
+              src="https://images.pexels.com/photos/7961265/pexels-photo-7961265.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            />
+            <div
+              id="canvasContainer"
+              class="bg-cover bg-center"
+              style="
+                background-image: url('https://images.pexels.com/photos/7961265/pexels-photo-7961265.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+              "
+            >
+              <canvas id="canvas" class="z-10"></canvas>
+            </div>
+          </div>
         </div>
-
-
       </div>
-    </div>
-  </div>
-</main>
-</body>
+    </main>
+  </body>
 </html>
