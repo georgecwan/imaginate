@@ -59,49 +59,41 @@ sizeElement.oninput = (e: any) => {
   size = e.target.value;
 };
 
-// enabling drawing on the blank canvas
-drawOnImage();
+const clearElement = document.getElementById("clear");
+clearElement.onclick = () => {
+  context.clearRect(0, 0, canvasElement.width, canvasElement.height);
+};
 
-function drawOnImage(image = null) {
-  const clearElement = document.getElementById("clear");
-  clearElement.onclick = () => {
-    context.clearRect(0, 0, canvasElement.width, canvasElement.height);
+let isDrawing;
+
+const getMousePos = (canvas: HTMLCanvasElement, evt: MouseEvent) => {
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - rect.left,
+    y: evt.clientY - rect.top,
   };
+};
 
-  let isDrawing;
+canvasElement.onmousedown = (e) => {
+  isDrawing = true;
+  context.beginPath();
+  context.lineWidth = parseInt(size);
+  context.lineJoin = "round";
+  context.lineCap = "round";
+  const { x, y } = getMousePos(canvasElement, e);
+  context.moveTo(x, y);
+};
 
-  canvasElement.onmousedown = (e) => {
-    console.log("onmousedown");
-    isDrawing = true;
-    context.beginPath();
-    context.lineWidth = parseInt(size);
-    context.lineJoin = "round";
-    context.lineCap = "round";
-    context.moveTo(e.clientX, e.clientY);
-  };
+canvasElement.onmousemove = (e) => {
+  const { x, y } = getMousePos(canvasElement, e);
 
-  function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-      x: evt.clientX - rect.left,
-      y: evt.clientY - rect.top,
-    };
+  if (isDrawing) {
+    context.lineTo(x, y);
+    context.stroke();
   }
+};
 
-  canvasElement.onmousemove = (e) => {
-    const { x, y } = getMousePos(canvasElement, e);
-    console.log(x, y);
-
-    if (isDrawing) {
-      context.lineTo(x, y);
-      context.stroke();
-    }
-  };
-
-  canvasElement.onmouseup = function () {
-    console.log("on mouseup");
-
-    isDrawing = false;
-    context.closePath();
-  };
-}
+canvasElement.onmouseup = function () {
+  isDrawing = false;
+  context.closePath();
+};
