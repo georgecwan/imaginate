@@ -17,7 +17,7 @@ function getUrl(info) {
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
         "id": "addNewImage",
-        "title": "Add image to gallery",
+        "title": "Add image to Imaginate",
         "contexts": ["image"],
     });
     chrome.contextMenus.onClicked.addListener(getUrl);
