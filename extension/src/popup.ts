@@ -1,16 +1,25 @@
 chrome.storage.sync.get(['urlList'], function(result) {
     const { urlList } = result;
-    const temp = document.createElement('img');
-    temp.src = "https://www.w3schools.com/images/lamp.jpg";
-    document.getElementById('imageList').appendChild(temp);
     console.log(urlList);
-    if (urlList !== undefined) {
-        for (let i = 0; i < urlList.length; i++) {
+    const imageList = document.getElementById("imageList");
+    const noImages = document.getElementById("noImages");
+    if (urlList !== undefined && urlList.length > 0) {
+        imageList.style.display = "grid";
+        noImages.style.display = "none";
+        urlList.forEach((url, i) => {
             const img = document.createElement('img');
-            img.src = urlList[i];
-            document.getElementById('imageList').appendChild(img);
-            console.log(urlList[i]);
-        }
+            img.src = url;
+            if (img.width / img.height > 1.3) {
+                img.style.gridColumn = "span 2 / span 2";
+                console.log("WIDE IMAGE");
+            }
+            imageList.appendChild(img);
+            console.log(url);
+        })
+    } else {
+        // No images are present at the moment
+        imageList.style.display = "none";
+        noImages.style.display = "block";
     }
 });
 
