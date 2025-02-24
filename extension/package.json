@@ -10,7 +10,7 @@
     "ts-loader": "^9.5.1",
     "typescript": "^5.7.3",
     "webpack": "^5.97.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^6.0.1"
   },
   "scripts": {
     "build": "tailwindcss -i ./input.css -o ./dist/output.css --minify && webpack --config ./webpack.config.js ",
