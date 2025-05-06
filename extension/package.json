@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@types/chrome": "^0.0.287",
-    "autoprefixer": "^10.4.20",
+    "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
     "copy-webpack-plugin": "^13.0.0",
     "postcss": "^8.5.3",
